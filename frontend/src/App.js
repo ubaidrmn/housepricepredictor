@@ -1,11 +1,8 @@
-import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import converter from "number-to-words";
+import Navbar from './Navbar';
 
-const selectSx = {
-  maxWidth: "100%",
-  width: "100%"
-}
 
 function App() {
   // Features
@@ -65,10 +62,12 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <Container sx={{
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginTop: "50px"
       }}>
         <Box sx={{
           maxWidth: "600px",
@@ -78,7 +77,6 @@ function App() {
           flexDirection: "column",
           rowGap: "20px"
         }}>
-
           <FormControl sx={{
             maxWidth: "100%",
             width: "100%"
