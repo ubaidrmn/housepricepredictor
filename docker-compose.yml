@@ -1,0 +1,22 @@
+version: "2.1"
+
+services:
+  api:
+    build: ./api/.
+    working_dir: /api/
+    volumes:
+      - ./api/:/api/
+      - ./model/:/model/
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0"]
+    ports:
+      - 8000:8000
+
+  frontend:
+    build: ./frontend/.
+    working_dir: /frontend/
+    volumes:
+      - ./frontend/public/:/frontend/public
+      - ./frontend/src/:/frontend/src
+    ports:
+      - 3000:3000
+    command: ["npm", "start"]
