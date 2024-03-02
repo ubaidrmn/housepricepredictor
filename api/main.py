@@ -1,4 +1,7 @@
-from typing import Union, Dict
+# Author: ubaidrmn
+# Date: March 2, 2024
+# Description: A simple API for interacting with the model
+
 from models import FeatureVector, LabelVector, CategoricalFeatures
 from fastapi import FastAPI, HTTPException
 from utils import *
