@@ -7,9 +7,14 @@ from fastapi import FastAPI, HTTPException
 from utils import *
 from fastapi.middleware.cors import CORSMiddleware
 
+import os
 
-DATASET = load_dataset("../model/data.csv")
-MODEL = load_model("../model/model.pkl")
+
+MODEL_PATH = os.getenv("MODEL_PATH", "../model/model.pkl")
+DATASET_PATH = os.getenv("DATASET_PATH", "../model/data.csv")
+
+DATASET = load_dataset(DATASET_PATH)
+MODEL = load_model(MODEL_PATH)
 SC, CT = get_original_scaler_and_encoder(DATASET)
 app = FastAPI()
 
