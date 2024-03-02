@@ -5,12 +5,22 @@
 from models import FeatureVector, LabelVector, CategoricalFeatures
 from fastapi import FastAPI, HTTPException
 from utils import *
+from fastapi.middleware.cors import CORSMiddleware
 
 
 DATASET = load_dataset("../model/data.csv")
 MODEL = load_model("../model/model.pkl")
 SC, CT = get_original_scaler_and_encoder(DATASET)
 app = FastAPI()
+
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.post("/predict")
@@ -27,7 +37,10 @@ async def predict(feature: FeatureVector) -> LabelVector:
 @app.get("/categorical-features")
 def get_categorical_features() -> CategoricalFeatures:
     try:
-        cf = CategoricalFeatures(property_types=DATASET['property_type'].unique(), locations=DATASET['location'].unique(), cities=DATASET['city'].unique())
+        locations = {}
+        for city in DATASET['city'].unique():
+            locations[city] = DATASET.loc[DATASET.city == city]['location'].unique().tolist()
+        cf = CategoricalFeatures(property_types=DATASET['property_type'].unique(), locations=locations, cities=DATASET['city'].unique())
         return cf
     except Exception as e:
         print(e)
