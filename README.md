@@ -1,6 +1,6 @@
 # House Price Predictor
 
-This application uses linear regression to predict house prices in Pakistan. It Considers the following features:
+An application for predicting housing prices in Pakistan. This application is based on a Linear Regression model that was implemented with the help of sickit-learn. Uses the following features to predict the label (price):
   - Area in marla
   - Bedrooms
   - Baths
