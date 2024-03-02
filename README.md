@@ -31,22 +31,30 @@ An application for predicting housing prices in Pakistan. This application is ba
 1. Navigate to the `api` directory.
 2. Install the required Python packages by running:
 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 3. Run the FastAPI server with:
    
-`uvicorn main:app`
+```
+uvicorn main:app
+```
 
 #### Frontend
 
 1. Navigate to the `frontend` directory.
 2. Install the required npm packages by running:
 
-`npm install`
+```
+npm install
+```
 
 3. Start the React development server with:
 
-`npm start`
+```
+npm start
+```
 
 ## Usage
 
