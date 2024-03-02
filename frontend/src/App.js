@@ -1,5 +1,6 @@
-import { Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Alert, Box, Button, Container, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
+import converter from "number-to-words";
 
 const selectSx = {
   maxWidth: "100%",
@@ -18,7 +19,7 @@ function App() {
   // Fetch data
   const [categoricalFeatures, setCategoricalFeatures] = useState(null);
   const [currentLocations, setCurrentLocations] = useState(null);
-  const [predictedPrice, setPredictedPrice] = useState()
+  const [predictedPrice, setPredictedPrice] = useState(null);
   const API_URL = process.env.API_URL || "http://localhost:8000";
 
   async function loadCategoricalFeatures() {
@@ -47,8 +48,10 @@ function App() {
       body: JSON.stringify(body),
       method: "POST"
     });
+
     const data = await res.json();
 
+    setPredictedPrice(data.price)
   }
 
   useEffect(() => { loadCategoricalFeatures(); }, [])
@@ -132,6 +135,11 @@ function App() {
           <TextField type="number" onChange={e => setBaths(e.target.value)} value={baths} label="No. of Baths" variant="outlined" />
 
           <Button onClick={predictPrice} variant={"contained"}>Predict Price</Button>
+
+          {predictedPrice && 
+          <Alert variant="filled" severity="success">
+            Prediction: {converter.toWords(predictedPrice)} PKR
+          </Alert>}
         </Box>
       </Container>
     </>
